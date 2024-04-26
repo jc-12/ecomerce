@@ -17,7 +17,7 @@ public class Orden {
     @ManyToOne
     private Usuario usuario;
     @OneToOne(mappedBy = "orden")
-    private DetalleOrden detalleOrden;
+    private DetalleOrden detalle;
 
     public Orden() {
     }
@@ -79,11 +79,11 @@ public class Orden {
     }
 
     public DetalleOrden getDetalleOrden() {
-        return detalleOrden;
+        return detalle;
     }
 
     public void setDetalleOrden(DetalleOrden detalleOrden) {
-        this.detalleOrden = detalleOrden;
+        this.detalle = detalleOrden;
     }
 
     @Override

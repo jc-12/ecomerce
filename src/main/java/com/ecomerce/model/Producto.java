@@ -13,7 +13,7 @@ public class Producto {
     private String imagen;
     private String precio;
     private String cantidad;
-@ManyToOne
+    @ManyToOne
     private Usuario usuario;
 
     public Producto() {
