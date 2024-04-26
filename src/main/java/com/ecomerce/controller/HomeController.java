@@ -5,7 +5,7 @@ import com.ecomerce.model.Orden;
 import com.ecomerce.model.Producto;
 import com.ecomerce.model.Usuario;
 import com.ecomerce.service.IUsuarioService;
-import com.ecomerce.service.ProductoService;
+import com.ecomerce.service.IProductoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class HomeController {
     private final Logger log = LoggerFactory.getLogger(HomeController.class);
     @Autowired
-    private ProductoService productoService;
+    private IProductoService productoService;
     @Autowired
     private IUsuarioService usuarioService;
 

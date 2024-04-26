@@ -2,7 +2,7 @@ package com.ecomerce.controller;
 
 import com.ecomerce.model.Producto;
 import com.ecomerce.model.Usuario;
-import com.ecomerce.service.ProductoService;
+import com.ecomerce.service.IProductoService;
 import com.ecomerce.service.UploadFileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class ProductoController {
     private final Logger LOGGER = LoggerFactory.getLogger(ProductoController.class);
     @Autowired
-    private ProductoService productoService;
+    private IProductoService productoService;
     @Autowired
     private UploadFileService upload;
 
