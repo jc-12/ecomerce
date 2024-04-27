@@ -20,6 +20,7 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario")
     private List<Producto> productos;
+
     @OneToMany(mappedBy = "usuario")
     private List<Orden> ordenes;
 

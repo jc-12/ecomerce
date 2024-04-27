@@ -3,6 +3,7 @@ package com.ecomerce.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "ordenes")
@@ -16,8 +17,8 @@ public class Orden {
     private double total;
     @ManyToOne
     private Usuario usuario;
-    @OneToOne(mappedBy = "orden")
-    private DetalleOrden detalle;
+    @OneToMany(mappedBy = "orden")
+    private List<DetalleOrden> detalle;
 
     public Orden() {
     }
@@ -78,12 +79,12 @@ public class Orden {
         this.usuario = usuario;
     }
 
-    public DetalleOrden getDetalleOrden() {
+    public List<DetalleOrden> getDetalle() {
         return detalle;
     }
 
-    public void setDetalleOrden(DetalleOrden detalleOrden) {
-        this.detalle = detalleOrden;
+    public void setDetalle(List<DetalleOrden> detalle) {
+        this.detalle = detalle;
     }
 
     @Override
