@@ -1,6 +1,8 @@
 package com.ecomerce.controller;
 
+import com.ecomerce.model.Orden;
 import com.ecomerce.model.Usuario;
+import com.ecomerce.service.IOrdenService;
 import com.ecomerce.service.IUsuarioService;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -21,6 +24,8 @@ public class UsuarioController {
     private final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
     @Autowired
     private IUsuarioService usuarioService;
+    @Autowired
+    private IOrdenService ordenService;
 
     //usuario/registro
     @GetMapping("/registro")
@@ -49,24 +54,29 @@ public class UsuarioController {
         logger.info("Accesos: {}", usuario);
 
         Optional<Usuario> user = usuarioService.findByEmail(usuario.getEmail());
-       // logger.info("Usuario optenido de la bd: {}", user.get());
+        // logger.info("Usuario optenido de la bd: {}", user.get());
         if (user.isPresent()) {
             session.setAttribute("idusuario", user.get().getId());
-            if(user.get().getTipo().equals("ADMIN")){
+            if (user.get().getTipo().equals("ADMIN")) {
                 return "redirect:/administrador";
-            }else {
+            } else {
                 return "redirect:/";
             }
-        }else {
+        } else {
             logger.info("Usuario no existe");
         }
         return "redirect:/";
     }
 
 
-@GetMapping("compras")
-    public String obtenerCompras(HttpSession session, Model model){
-        model.addAttribute("sesion",session.getAttribute("idusuario"));
+    @GetMapping("compras")
+    public String obtenerCompras(HttpSession session, Model model) {
+        model.addAttribute("sesion", session.getAttribute("idusuario"));
+        Usuario usuario = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
+        List<Orden> ordenes = ordenService.findByUsuario(usuario);
+
+        model.addAttribute("ordenes",ordenes);
+
         return "usuario/compras";
     }
 
